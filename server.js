@@ -35,12 +35,14 @@ import { startStandaloneServer } from  '@apollo/server/standalone';
 import Stripe from 'stripe'
 import multer from 'multer'
 import mysql from "mysql";
+import apiKey from './credentials/stripeApiKey'
+import dbInfo from './credentials/db'
 
 const connection = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: '',
-	database: "binaryBridges",
+	host: dbInfo.host,
+	user: dbInfo.user,
+	password: dbInfo.password,
+	database: dbInfo.database,
 });
 
 connection.connect((err) => {
@@ -107,7 +109,7 @@ app.post('/upload-video', (req, httpRes) => {
 
 // stripe
 
-const stripe = new Stripe('sk_test_031N0HDpevJfVexGmmWlsBy0')
+const stripe = new Stripe(apiKey)
 
 app.post('/create-payment-intent', async (req, res) => { 
   const { amount } = req.body
