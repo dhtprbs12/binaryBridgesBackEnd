@@ -151,7 +151,30 @@ const resolvers =  {
 					}
 				})
 			})
-    }
+    }, 
+		createContact: (parent, args) => {
+			console.log(`Mutation: createContact: ${JSON.stringify(args)}`)
+      const name = args.name
+			const email = args.email
+			const message = args.message
+			const sql = 'insert into contact (name, email, message) values ?'
+      const values = [
+        [name, email, message]
+      ]
+			return new Promise((resolve, reject) => {
+				connection.query(sql, [values], function (err, res) {
+					if (err) {
+						console.log(`Error while createContact -- ERROR: ${err}`);
+						reject(err)
+					} else {
+						console.log(`Succeeded while createContact`);
+						resolve({
+              success: 'success'
+            })
+					}
+				})
+			})
+		}
 	}
 };
 

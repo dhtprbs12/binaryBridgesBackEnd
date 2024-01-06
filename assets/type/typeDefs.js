@@ -21,6 +21,11 @@ const typeDefs = `#graphql
 		duration: String
 		sequence: String
 	}
+	type contact {
+		name: String
+		email: String
+		message: String
+	}
 	type Query {
 		feedbacks(id: Int): [Feedback]
     subscribes(id: Int): [Subscribe]
@@ -33,9 +38,13 @@ const typeDefs = `#graphql
 	type CreateFeedbackResponse {
 		success: String
 	}
+	type CreateContactResponse {
+		success: String
+	}
 	type Mutation {
 		createFeedback(email: String!, videoId: String!, rating: String!, comment: String!): CreateFeedbackResponse
     startSubscribe(email: String!): StartSubscribeResponse
+		createContact(name: String!, email: String!, message: String!): CreateContactResponse
 	}
   `;
 

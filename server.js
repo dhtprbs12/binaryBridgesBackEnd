@@ -35,8 +35,8 @@ import { startStandaloneServer } from  '@apollo/server/standalone';
 import Stripe from 'stripe'
 import multer from 'multer'
 import mysql from "mysql";
-import apiKey from './credentials/stripeApiKey'
-import dbInfo from './credentials/db'
+import apiKey from './credentials/stripeApiKey.js'
+import dbInfo from './credentials/db.js'
 
 const connection = mysql.createConnection({
 	host: dbInfo.host,
