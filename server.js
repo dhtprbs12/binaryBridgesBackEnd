@@ -35,6 +35,8 @@ import { startStandaloneServer } from  '@apollo/server/standalone';
 import Stripe from 'stripe'
 import multer from 'multer'
 import mysql from "mysql";
+import dotenv from 'dotenv'
+dotenv.config()
 
 const connection = mysql.createConnection({
 	host: process.env.DB_HOST,
@@ -42,7 +44,6 @@ const connection = mysql.createConnection({
 	password: process.env.DB_PW,
 	database: process.env.DB,
 });
-
 connection.connect((err) => {
 	if (err) {
 		return err;

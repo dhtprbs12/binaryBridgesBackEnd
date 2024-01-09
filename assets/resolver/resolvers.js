@@ -1,12 +1,19 @@
 import mysql from "mysql";
 import { v4 as uuidv4 } from 'uuid'
 import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config()
+
+console.log(`host: ${process.env.DB_HOST}`)
+console.log(`user: ${process.env.DB_USER}`)
+console.log(`pw: ${process.env.DB_PW}`)
+console.log(`db: ${process.env.DB}`)
 
 const connection = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: '',
-	database: "binaryBridges",
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
+	password: process.env.DB_PW,
+	database: process.env.DB,
 });
 
 connection.connect((err) => {
