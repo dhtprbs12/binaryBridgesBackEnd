@@ -2,8 +2,7 @@ import mysql from "mysql";
 import { v4 as uuidv4 } from 'uuid'
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
-dotenv.config()
-
+dotenv.config({path:process.cwd() + '/.env'})
 console.log(`host: ${process.env.DB_HOST}`)
 console.log(`user: ${process.env.DB_USER}`)
 console.log(`pw: ${process.env.DB_PW}`)
