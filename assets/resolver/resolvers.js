@@ -1,8 +1,9 @@
 import mysql from "mysql";
-import { v4 as uuidv4 } from 'uuid'
 import nodemailer from 'nodemailer'
 import path from 'path'
 import dotenv from 'dotenv'
+import emailHtml from './email.js'
+
 const __dirname = path.resolve();
 dotenv.config({path: __dirname + '/.env'})
 
@@ -118,9 +119,9 @@ const resolvers =  {
       console.log(`Mutation: startSubscribe: ${JSON.stringify(args)}`)
 			const email = args.email
 			const sql = 'insert into subscribe (email, token) values ?'
-      const uuid = uuidv4()
+      const token = Math.floor(100000 + Math.random() * 900000)
       const values = [
-        [email, uuid]
+        [email, token]
       ]
 			return new Promise((resolve, reject) => {
 				connection.query(sql, [values], async function (err, res) {
@@ -131,12 +132,8 @@ const resolvers =  {
             const mailMeta = {
               from: 'dhtprbs12@gmail.com',
               to: email,
-              subject: 'Thank your subscribing. Here is your token to watch tutorials for free',
-              html: `
-              <b>Hey There!</b>
-              <br>This is your token</br>
-              <p>${uuid}</p>
-              `
+              subject: 'Binary Bridge - Thank your subscribing. Here is your token',
+              html: emailHtml(email.slice(0, email.indexOf('@')), token)
             }
 
             const transporter = nodemailer.createTransport({
