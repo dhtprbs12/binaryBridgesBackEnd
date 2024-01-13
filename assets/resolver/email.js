@@ -60,7 +60,7 @@ const email = (email, token) =>  {
 													<tbody>
 														<tr>
 															<td style="padding-bottom: 20px;" align="center" valign="top" class="description">
-																<p class="text" style="color:#666;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:22px;text-transform:none;text-align:center;padding:0;margin:0">Thanks for subscribe for the Binary Bridge. We hope enjoy your journey..</p>
+																<p class="text" style="color:#666;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:22px;text-transform:none;text-align:center;padding:0;margin:0">Thanks for subscribe for the Binary Bridge. We hope enjoy your journey!</p>
 															</td>
 														</tr>
 													</tbody>
@@ -73,7 +73,7 @@ const email = (email, token) =>  {
 																	<tbody>
 																		<tr>
 																			<td style="font-size: 25px" align="center" class="ctaButton"> 
-                                        Here is your token...
+                                        Here is your token:
 																			</td>
 																		</tr>
 																	</tbody>
@@ -143,7 +143,7 @@ const email = (email, token) =>  {
 										</tr>
 										<tr>
 											<td style="padding: 0px 10px 10px;" align="center" valign="top" class="footerEmailInfo">
-												<p class="text" style="color:#bbb;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:20px;text-transform:none;text-align:center;padding:0;margin:0">If you have any quetions please contact us <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">dhtprbs12@gmail.com</a>
+												<p class="text" style="color:#bbb;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:20px;text-transform:none;text-align:center;padding:0;margin:0">If you have any quetions please contact us <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">binarybridgeonline@gmail.com</a>
                         </p>
 											</td>
 										</tr>

@@ -130,7 +130,7 @@ const resolvers =  {
 						reject(err)
 					} else {
             const mailMeta = {
-              from: 'dhtprbs12@gmail.com',
+              from: 'binarybridgeonline@gmail.com',
               to: email,
               subject: 'Binary Bridge - Thank your subscribing. Here is your token',
               html: emailHtml(email.slice(0, email.indexOf('@')), token)
@@ -139,8 +139,8 @@ const resolvers =  {
             const transporter = nodemailer.createTransport({
               service: 'gmail',
               auth: {
-                user: 'dhtprbs12@gmail.com',
-                pass: 'fhmmnbuhtpnfonhn'
+                user: 'binarybridgeonline@gmail.com',
+                pass: 'qstwnjdayrackgkn'
               }
             })
             transporter.sendMail(mailMeta, function(err, info){
