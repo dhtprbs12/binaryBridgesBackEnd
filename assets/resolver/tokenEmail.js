@@ -1,9 +1,5 @@
-import path from 'path'
-const __dirname = path.resolve();
-
-const email = (email, token) =>  {
-  return (
-    `
+const email = (email, token) => {
+	return `
 <!doctype html>
 <html>
   <head>
@@ -28,13 +24,6 @@ const email = (email, token) =>  {
 										<tr>
 											<td style="background-color:rgb(206, 46, 46);font-size:1px;line-height:3px" class="topBorder" height="3">&nbsp;</td>
 										</tr>
-										<tr>
-											<td style="padding-top: 60px; padding-bottom: 20px;" align="center" valign="middle" class="emailLogo">
-												<a href="#" style="text-decoration:none" target="_blank">
-													<img alt="" border="0" src="cid:${__dirname + '/assets/eBook.png'}" style="width:100%;max-width:150px;height:auto;display:block" width="150">
-												</a>
-											</td>
-										</tr>
                     <!--
 										<tr>
 											<td style="padding-bottom: 20px;" align="center" valign="top" class="imgHero">
@@ -45,7 +34,7 @@ const email = (email, token) =>  {
 										</tr>
                     -->
 										<tr>
-											<td style="padding-bottom: 5px; padding-left: 20px; padding-right: 20px;" align="center" valign="top" class="mainTitle">
+											<td style="padding-top: 20px; padding-bottom: 5px; padding-left: 20px; padding-right: 20px;" align="center" valign="top" class="mainTitle">
 												<h2 class="text" style="color:#000;font-family:Poppins,Helvetica,Arial,sans-serif;font-size:28px;font-weight:500;font-style:normal;letter-spacing:normal;line-height:36px;text-transform:none;text-align:center;padding:0;margin:0">Hi, <b>${email}</b></h2>
 											</td>
 										</tr>
@@ -59,8 +48,8 @@ const email = (email, token) =>  {
 												<table border="0" cellpadding="0" cellspacing="0" width="100%" class="tableDescription" style="">
 													<tbody>
 														<tr>
-															<td style="padding-bottom: 20px;" align="center" valign="top" class="description">
-																<p class="text" style="color:#666;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:22px;text-transform:none;text-align:center;padding:0;margin:0">Thanks for subscribe for the Binary Bridge. We hope enjoy your journey!</p>
+															<td style="padding-bottom: 10px;" align="center" valign="top" class="description">
+																<p class="text" style="color:#666;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:20px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:22px;text-transform:none;text-align:center;padding:0;margin:0">Thanks for subscribing the Binary Bridge. We hope enjoy your journey!</p>
 															</td>
 														</tr>
 													</tbody>
@@ -68,7 +57,7 @@ const email = (email, token) =>  {
 												<table border="0" cellpadding="0" cellspacing="0" width="100%" class="tableButton" style="">
 													<tbody>
 														<tr>
-															<td style="padding-top:20px;padding-bottom:20px" align="center" valign="top">
+															<td style="padding-top:10px;padding-bottom:20px" align="center" valign="top">
 																<table border="0" cellpadding="0" cellspacing="0" align="center">
 																	<tbody>
 																		<tr>
@@ -113,20 +102,8 @@ const email = (email, token) =>  {
 									<tbody>
 										<tr>
 											<td style="padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:10px" align="center" valign="top" class="socialLinks">
-												<a href="#facebook-link" style="display:inline-block" target="_blank" class="facebook">
-													<img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/facebook.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-												</a>
-												<a href="#twitter-link" style="display: inline-block;" target="_blank" class="twitter">
-													<img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/twitter.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-												</a>
-												<a href="#pintrest-link" style="display: inline-block;" target="_blank" class="pintrest">
-													<img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/pintrest.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-												</a>
 												<a href="#instagram-link" style="display: inline-block;" target="_blank" class="instagram">
 													<img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/instagram.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-												</a>
-												<a href="#linkdin-link" style="display: inline-block;" target="_blank" class="linkdin">
-													<img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/linkdin.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
 												</a>
 											</td>
 										</tr>
@@ -136,25 +113,9 @@ const email = (email, token) =>  {
 											</td>
 										</tr>
 										<tr>
-											<td style="padding: 0px 10px 20px;" align="center" valign="top" class="footerLinks">
-												<p class="text" style="color:#bbb;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:20px;text-transform:none;text-align:center;padding:0;margin:0"> <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">View Web Version </a>&nbsp;|&nbsp; <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">Email Preferences </a>&nbsp;|&nbsp; <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">Privacy Policy</a>
-												</p>
-											</td>
-										</tr>
-										<tr>
 											<td style="padding: 0px 10px 10px;" align="center" valign="top" class="footerEmailInfo">
 												<p class="text" style="color:#bbb;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:20px;text-transform:none;text-align:center;padding:0;margin:0">If you have any quetions please contact us <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">binarybridgeonline@gmail.com</a>
                         </p>
-											</td>
-										</tr>
-										<tr>
-											<td style="padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:10px" align="center" valign="top" class="appLinks">
-												<a href="#Play-Store-Link" style="display: inline-block;" target="_blank" class="play-store">
-													<img alt="" border="0" src="http://email.aumfusion.com/vespro/img/app/play-store.png" style="height:auto;margin:5px;width:100%;max-width:120px" width="120">
-												</a>
-												<a href="#App-Store-Link" style="display: inline-block;" target="_blank" class="app-store">
-													<img alt="" border="0" src="http://email.aumfusion.com/vespro/img/app/app-store.png" style="height:auto;margin:5px;width:100%;max-width:120px" width="120">
-												</a>
 											</td>
 										</tr>
 										<tr>
@@ -176,7 +137,6 @@ const email = (email, token) =>  {
   </body>
 </html>
 `
-  )
 }
 
 export default email

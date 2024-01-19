@@ -1,11 +1,11 @@
-import mysql from "mysql";
+import mysql from 'mysql'
 import nodemailer from 'nodemailer'
 import path from 'path'
 import dotenv from 'dotenv'
-import emailHtml from './email.js'
+import tokenEmailHtml from './tokenEmail.js'
 
-const __dirname = path.resolve();
-dotenv.config({path: __dirname + '/.env'})
+const __dirname = path.resolve()
+dotenv.config({ path: __dirname + '/.env' })
 
 console.log(`host: ${process.env.DB_HOST}`)
 console.log(`user: ${process.env.DB_USER}`)
@@ -17,171 +17,173 @@ const connection = mysql.createConnection({
 	user: process.env.DB_USER,
 	password: process.env.DB_PW,
 	database: process.env.DB,
-});
+})
 
 connection.connect((err) => {
 	if (err) {
-		return err;
+		return err
 	}
-});
+})
 
-const resolvers =  {
+const resolvers = {
 	Query: {
-		// should declare parent to get argument args.kind. 
+		// should declare parent to get argument args.kind.
 		// don't know why tho
 		feedbacks: (parent, args) => {
 			console.log(`Query: feedbacks: ${JSON.stringify(args)}`)
 			const id = args.id
 			return new Promise((resolve, reject) => {
 				connection.query(
-					`select * from feedback limit 0, 100`, function (err, res) {
+					`select * from feedback limit 0, 100`,
+					function (err, res) {
 						if (err) {
-							console.log(`Error while getting feedback -- ERROR: ${err}`);
+							console.log(`Error while getting feedback -- ERROR: ${err}`)
 							reject(err)
 						} else {
-							console.log(`Succeeded while getting feedback ${JSON.stringify(res)}`);
+							console.log(
+								`Succeeded while getting feedback ${JSON.stringify(res)}`
+							)
 							resolve(JSON.parse(JSON.stringify(res)))
 						}
 					}
-				);
+				)
 			})
 		},
-    subscribes: () => {},
-    verification: (parent, args) => {
-      console.log(`Query: verification: ${JSON.stringify(args)}`)
-      const email = args.email
-      const token = args.token
+		subscribes: () => {},
+		verification: (parent, args) => {
+			console.log(`Query: verification: ${JSON.stringify(args)}`)
+			const email = args.email
+			const token = args.token
 
-      return new Promise((resolve, reject) => {
+			return new Promise((resolve, reject) => {
 				connection.query(
-					`select * from subscribe where email='${email}' and token='${token}'`, function (err, res) {
+					`select * from subscribe where email='${email}' and token='${token}'`,
+					function (err, res) {
 						if (err) {
-							console.log(`Error while verifing -- ERROR: ${err}`);
+							console.log(`Error while verifing -- ERROR: ${err}`)
 							reject(err)
-						} else if(res.length > 0) {
-							console.log(`Succeeded while verifing ${JSON.stringify(res)}`);
+						} else if (res.length > 0) {
+							console.log(`Succeeded while verifing ${JSON.stringify(res)}`)
 							resolve({
-                res: 'existed'
-              })
+								res: 'existed',
+							})
 						} else {
-              console.log(`Succeeded while verifing but not existing user ${JSON.stringify(res)}`);
+							console.log(
+								`Succeeded while verifing but not existing user ${JSON.stringify(
+									res
+								)}`
+							)
 							resolve({
-                res: 'not_existed'
-              })
-            }
+								res: 'not_existed',
+							})
+						}
 					}
-				);
+				)
 			})
-    },
-    videos: (parent, args) => {
-      console.log(`Query: videos`)
-      return new Promise((resolve, reject) => {
-				connection.query(
-					`select * from video`, function (err, res) {
-						if (err) {
-							console.log(`Error while getting videos -- ERROR: ${err}`);
-							reject(err)
-						} else {
-              console.log(`Succeeded while getting videos ${JSON.stringify(res)}`);
-							resolve(JSON.parse(JSON.stringify(res)))
-            }
+		},
+		videos: (parent, args) => {
+			console.log(`Query: videos`)
+			return new Promise((resolve, reject) => {
+				connection.query(`select * from video`, function (err, res) {
+					if (err) {
+						console.log(`Error while getting videos -- ERROR: ${err}`)
+						reject(err)
+					} else {
+						console.log(`Succeeded while getting videos ${JSON.stringify(res)}`)
+						resolve(JSON.parse(JSON.stringify(res)))
 					}
-				);
+				})
 			})
-    }
+		},
 	},
 	Mutation: {
 		createFeedback: (parent, args) => {
 			console.log(`Mutation: createFeedback: ${JSON.stringify(args)}`)
-      const email = args.email
+			const email = args.email
 			const videoId = args.videoId
 			const rating = args.rating
 			const comment = args.comment
-			const sql = 'insert into feedback (email, videoId, rating, comment) values ?'
-      const values = [
-        [email, videoId, rating, comment]
-      ]
+			const sql =
+				'insert into feedback (email, videoId, rating, comment) values ?'
+			const values = [[email, videoId, rating, comment]]
 			return new Promise((resolve, reject) => {
 				connection.query(sql, [values], function (err, res) {
 					if (err) {
-						console.log(`Error while createFeedback -- ERROR: ${err}`);
+						console.log(`Error while createFeedback -- ERROR: ${err}`)
 						reject(err)
 					} else {
-						console.log(`Succeeded while createFeedback`);
+						console.log(`Succeeded while createFeedback`)
 						resolve({
-              success: 'success'
-            })
+							success: 'success',
+						})
 					}
 				})
 			})
 		},
-    startSubscribe: (parent, args) => {
-      console.log(`Mutation: startSubscribe: ${JSON.stringify(args)}`)
+		startSubscribe: (parent, args) => {
+			console.log(`Mutation: startSubscribe: ${JSON.stringify(args)}`)
 			const email = args.email
 			const sql = 'insert into subscribe (email, token) values ?'
-      const token = Math.floor(100000 + Math.random() * 900000)
-      const values = [
-        [email, token]
-      ]
+			const token = Math.floor(100000 + Math.random() * 900000)
+			const values = [[email, token]]
 			return new Promise((resolve, reject) => {
 				connection.query(sql, [values], async function (err, res) {
 					if (err) {
-						console.log(`Error while startSubscribe -- ERROR: ${err}`);
+						console.log(`Error while startSubscribe -- ERROR: ${err}`)
 						reject(err)
 					} else {
-            const mailMeta = {
-              from: 'binarybridgeonline@gmail.com',
-              to: email,
-              subject: 'Binary Bridge - Thank your subscribing. Here is your token',
-              html: emailHtml(email.slice(0, email.indexOf('@')), token)
-            }
+						const mailMeta = {
+							from: 'binarybridgeonline@gmail.com',
+							to: email,
+							subject:
+								'Binary Bridge - Thank your subscribing. Here is your token',
+							html: tokenEmailHtml(email.slice(0, email.indexOf('@')), token),
+						}
 
-            const transporter = nodemailer.createTransport({
-              service: 'gmail',
-              auth: {
-                user: 'binarybridgeonline@gmail.com',
-                pass: 'qstwnjdayrackgkn'
-              }
-            })
-            transporter.sendMail(mailMeta, function(err, info){
-              if(err){
-                console.log(err)
-                reject(err)
-              }else{
-                console.log(`Succeeded while startSubscribe`);
-                resolve({
-                  success: 'success'
-                })
-              }
-            })
+						const transporter = nodemailer.createTransport({
+							service: 'gmail',
+							auth: {
+								user: 'binarybridgeonline@gmail.com',
+								pass: 'qstwnjdayrackgkn',
+							},
+						})
+						transporter.sendMail(mailMeta, function (err, info) {
+							if (err) {
+								console.log(err)
+								reject(err)
+							} else {
+								console.log(`Succeeded while startSubscribe`)
+								resolve({
+									success: 'success',
+								})
+							}
+						})
 					}
 				})
 			})
-    }, 
+		},
 		createContact: (parent, args) => {
 			console.log(`Mutation: createContact: ${JSON.stringify(args)}`)
-      const name = args.name
+			const name = args.name
 			const email = args.email
 			const message = args.message
 			const sql = 'insert into contact (name, email, message) values ?'
-      const values = [
-        [name, email, message]
-      ]
+			const values = [[name, email, message]]
 			return new Promise((resolve, reject) => {
 				connection.query(sql, [values], function (err, res) {
 					if (err) {
-						console.log(`Error while createContact -- ERROR: ${err}`);
+						console.log(`Error while createContact -- ERROR: ${err}`)
 						reject(err)
 					} else {
-						console.log(`Succeeded while createContact`);
+						console.log(`Succeeded while createContact`)
 						resolve({
-              success: 'success'
-            })
+							success: 'success',
+						})
 					}
 				})
 			})
-		}
-	}
-};
+		},
+	},
+}
 
 export default resolvers
