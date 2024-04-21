@@ -132,31 +132,8 @@ const resolvers = {
 						console.log(`Error while startSubscribe -- ERROR: ${err}`)
 						reject(err)
 					} else {
-						const mailMeta = {
-							from: 'binarybridgeonline@gmail.com',
-							to: email,
-							subject:
-								'Binary Bridge - Thank your subscribing. Here is your token',
-							html: tokenEmailHtml(email.slice(0, email.indexOf('@')), token),
-						}
-
-						const transporter = nodemailer.createTransport({
-							service: 'gmail',
-							auth: {
-								user: 'binarybridgeonline@gmail.com',
-								pass: 'qstwnjdayrackgkn',
-							},
-						})
-						transporter.sendMail(mailMeta, function (err, info) {
-							if (err) {
-								console.log(err)
-								reject(err)
-							} else {
-								console.log(`Succeeded while startSubscribe`)
-								resolve({
-									success: 'success',
-								})
-							}
+						resolve({
+							success: 'success',
 						})
 					}
 				})
