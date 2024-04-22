@@ -14,6 +14,9 @@
 # production
 /build
 
+# assets
+.zip
+
 # misc
 .DS_Store
 .env.local
