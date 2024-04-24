@@ -206,16 +206,16 @@ app.post('/create-payment-intent', async (req, res) => {
 app.get('/download/:id', (req, res) => {
 	const productName = req.params.id
 	const docPath = path.join(__dirname, `/assets/${productName}.zip`)
-	const file = fs.createWriteStream(docPath)
 	console.log(`Start Dowloading: ${productName}.zip...`)
 	res.download(docPath, `${productName}.zip`, function (err) {
 		if (err) {
 			// if the file download fails, we throw an error
 			res.status(500).send(new Error(err))
 			console.log(`Error While Dowloading: ${productName}.zip...`)
+		} else {
+			console.log(`Complete Dowloading: ${productName}.zip...`)
 		}
 	})
-	console.log(`End Dowloading: ${productName}.zip...`)
 })
 
 app.post('/send-to-email', async (req, res) => {
