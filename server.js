@@ -208,14 +208,12 @@ app.get('/download/:id', (req, res) => {
 	const docPath = path.join(__dirname, `/assets/${productName}.zip`)
 	const file = fs.createWriteStream(docPath)
 	console.log(`Start Dowloading: ${productName}.zip...`)
-	var stat = fs.statSync(file)
-	res.writeHead(200, { 'Content-Length': stat.size })
-	var fReadStream = fs.createReadStream(file)
-	fReadStream.pipe(res)
-	fReadStream.on('error', (err) => {
-		// log the error and prematurely end the response stream
-		console.log(`Error While Dowloading: ${productName}.zip...`)
-		res.status(500).send(new Error(err))
+	res.download(docPath, `${productName}.zip`, function (err) {
+		if (err) {
+			// if the file download fails, we throw an error
+			res.status(500).send(new Error(err))
+			console.log(`Error While Dowloading: ${productName}.zip...`)
+		}
 	})
 	console.log(`End Dowloading: ${productName}.zip...`)
 })
