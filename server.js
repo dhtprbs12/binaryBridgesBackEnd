@@ -269,7 +269,7 @@ app.get('/video/:id/data', (req, res) => {
 })
 
 app.get('/video/:id', (req, res) => {
-	const path = `assets/${req.params.id}.mp4`
+	const path = `assets/${req.params.id}.mov`
 	const stat = fs.statSync(path)
 	const fileSize = stat.size
 	const range = req.headers.range
@@ -283,14 +283,14 @@ app.get('/video/:id', (req, res) => {
 			'Content-Range': `bytes ${start}-${end}/${fileSize}`,
 			'Accept-Ranges': 'bytes',
 			'Content-Length': chunksize,
-			'Content-Type': 'video/mp4',
+			'Content-Type': 'video/mov',
 		}
 		res.writeHead(206, head)
 		file.pipe(res)
 	} else {
 		const head = {
 			'Content-Length': fileSize,
-			'Content-Type': 'video/mp4',
+			'Content-Type': 'video/mov',
 		}
 		res.writeHead(200, head)
 		fs.createReadStream(path).pipe(res)
