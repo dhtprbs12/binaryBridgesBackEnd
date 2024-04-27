@@ -12,17 +12,12 @@ console.log(`user: ${process.env.DB_USER}`)
 console.log(`pw: ${process.env.DB_PW}`)
 console.log(`db: ${process.env.DB}`)
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
+	connectionLimit: 10,
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PW,
 	database: process.env.DB,
-})
-
-connection.connect((err) => {
-	if (err) {
-		return err
-	}
 })
 
 const resolvers = {

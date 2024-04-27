@@ -34,24 +34,20 @@ import bodyParser from 'body-parser'
 import { startStandaloneServer } from '@apollo/server/standalone'
 import Stripe from 'stripe'
 import multer from 'multer'
-import mysql from 'mysql'
+import mysql2 from 'mysql2'
 import dotenv from 'dotenv'
 import nodemailer from 'nodemailer'
 import sendProductToEmail from './assets/sendProtuctToEmail.js'
 dotenv.config()
 const __dirname = path.resolve()
 
-const connection = mysql.createConnection({
-	host: process.env.DB_HOST,
-	user: process.env.DB_USER,
-	password: process.env.DB_PW,
-	database: process.env.DB,
-})
-connection.connect((err) => {
-	if (err) {
-		return err
-	}
-})
+// const connection = mysql2.createPool({
+// 	connectionLimit: 10,
+// 	host: process.env.DB_HOST,
+// 	user: process.env.DB_USER,
+// 	password: process.env.DB_PW,
+// 	database: process.env.DB,
+// })
 
 const server = new ApolloServer({ typeDefs, resolvers })
 startStandaloneServer(server, {
@@ -109,17 +105,17 @@ app.post('/upload-video', (req, httpRes) => {
 					req.body.sequence,
 				],
 			]
-			connection.query(sql, [values], function (err, res) {
-				if (err) {
-					console.log(`Error while uploading video -- ERROR: ${err}`)
-					httpRes.status(500).send(new Error(err))
-				} else {
-					console.log(`Succeeded on uploading video`)
-					httpRes.send({
-						result: 'success',
-					})
-				}
-			})
+			// connection.query(sql, [values], function (err, res) {
+			// 	if (err) {
+			// 		console.log(`Error while uploading video -- ERROR: ${err}`)
+			// 		httpRes.status(500).send(new Error(err))
+			// 	} else {
+			// 		console.log(`Succeeded on uploading video`)
+			// 		httpRes.send({
+			// 			result: 'success',
+			// 		})
+			// 	}
+			// })
 		}
 	})
 })
