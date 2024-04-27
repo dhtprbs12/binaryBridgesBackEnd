@@ -1,4 +1,4 @@
-import mysql from 'mysql'
+import mysql2 from 'mysql2'
 import nodemailer from 'nodemailer'
 import path from 'path'
 import dotenv from 'dotenv'
@@ -12,7 +12,7 @@ console.log(`user: ${process.env.DB_USER}`)
 console.log(`pw: ${process.env.DB_PW}`)
 console.log(`db: ${process.env.DB}`)
 
-const connection = mysql.createPool({
+const connection = mysql2.createPool({
 	connectionLimit: 10,
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
